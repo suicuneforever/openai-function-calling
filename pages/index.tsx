@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
+  const [question, setQuestion] = useState("");
   const [result, setResult] = useState();
 
   async function onSubmit(event) {
@@ -14,7 +14,11 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
+<<<<<<< HEAD
+        body: JSON.stringify({ text: question }),
+=======
         body: JSON.stringify({ text: animalInput }),
+>>>>>>> 28649fd4b293a6cf485e8c27babc6b49d9eeb738
       });
 
       const data = await response.json();
@@ -26,7 +30,7 @@ export default function Home() {
       }
 
       setResult(data.result);
-      setAnimalInput("");
+      setQuestion("");
     } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
@@ -42,17 +46,16 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+        <h3>Ask a question</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            name="question"
+            placeholder="Enter a question"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <input type="submit" value="Submit" />
         </form>
         <div className={styles.result}>{result}</div>
       </main>
