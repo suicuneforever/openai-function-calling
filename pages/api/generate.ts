@@ -31,7 +31,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     let responseText = "";
     const response = await getOpenAiResponse();
     if (response.function_call) {
-      responseText = callFunction(response.function_call);
+      responseText = await callFunction(response.function_call);
       history.push({
         role: "function",
         name: response.function_call.name,
